@@ -86,7 +86,23 @@ export async function getRestaurantById(db, restaurantId) {
 }
 
 export function getRestaurantSnapshotById(restaurantId, cb) {
-  return;
+  if (!restaurantId) {
+    console.log("Error: Invalid ID received: ", restaurantId);
+    return;
+  }
+
+  if (typeof cb !== "function") {
+    console.log("Error: The callback parameter is not a function");
+    return;
+  }
+
+  const docRef = doc(db, "restaurants", restaurantId);
+  return onSnapshot(docRef, (docSnap) => {
+    cb({
+      ...docSnap.data(),
+      timestamp: docSnap.data().timestamp.toDate(),
+    });
+  });
 }
 
 export async function getReviewsByRestaurantId(db, restaurantId) {
