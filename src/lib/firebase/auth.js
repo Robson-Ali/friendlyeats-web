@@ -1,3 +1,10 @@
+import { getAuth, onIdTokenChanged } from "firebase/auth";
+
+const auth = getAuth();
+onIdTokenChanged(auth, (user) => {
+  // handle user state
+});
+
 export function onAuthStateChanged(cb) {
   return _onAuthStateChanged(auth, cb);
 }
