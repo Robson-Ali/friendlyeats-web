@@ -1,9 +1,11 @@
-import { getAuth, onIdTokenChanged } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged as _onAuthStateChanged,
+  onIdTokenChanged as _onIdTokenChanged,
+} from "firebase/auth";
 
-const auth = getAuth();
-onIdTokenChanged(auth, (user) => {
-  // handle user state
-});
+import { auth } from "@/src/lib/firebase/clientApp";
 
 export function onAuthStateChanged(cb) {
   return _onAuthStateChanged(auth, cb);
